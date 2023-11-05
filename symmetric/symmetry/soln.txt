@@ -1,0 +1,22 @@
+Symmetry
+OFB:
+cipher = plain ^ f(iv)
+f(iv) becomes the next iv, independent of the plaintext/ciphertext
+
+Thoughts:
+    Why is it called symmetry? Must be a reason
+
+plain ^ f(iv) = cipher, so plain = cipher ^ f(iv)
+Encrypting the ciphertext with the same iv will get the plaintext back!
+
+{"ciphertext":"88b1554e996bd2fd0f863db51f6353a58c79bfe5596b6e7350eea8d320e649c83a5573a77454019bbc9f8b04811e858a9e"}
+
+iv: 88b1554e996bd2fd0f863db51f6353a5
+
+ciphertext: 8c79bfe5596b6e7350eea8d320e649c83a5573a77454019bbc9f8b04811e858a9e
+
+bytes.fromhex("63727970746f7b3066625f31355f35796d6d3337723163346c5f2121213131217d")
+b'crypto{0fb_15_5ymm37r1c4l_!!!11!}'
+
+Reflection:
+Interesting, only iv gets passed into encryption, the length of the input doesn't matter (first stream cipher I've seen)

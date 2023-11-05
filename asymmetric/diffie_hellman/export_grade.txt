@@ -1,0 +1,35 @@
+Alice and Bob are using legacy codebases and need to negotiate parameters they both support. You've man-in-the-middled this negotiation step, and can passively observe thereafter. How are you going to ruin their day this time?
+
+Idea: Pick 64bit diffie hellman then bash it out, since tiny primes can be brute forced
+
+Intercepted from Alice: {"supported": ["DH1536", "DH1024", "DH512", "DH256", "DH128", "DH64"]}
+Send to Bob: {"supported": ["DH64"]}
+Intercepted from Bob: {"chosen": "DH64"}
+Send to Alice: {"chosen": "DH64"}
+
+Intercepted from Alice: {"p": "0xde26ab651b92a129", "g": "0x2", "A": "0x1ae240a064e2b9cc"}
+Intercepted from Bob: {"B": "0xd2c664c75826f832"}
+
+p = 16007670376277647657
+g = 2
+A = 1937181847354259916
+B = 15187937600693794866
+
+a = 1812352287655545134
+
+key = pow(B, a, p) = 14706387294703921994
+
+Intercepted from Alice: {"iv": "47417bc7199ce0e647f92c171a7aa0ab", "encrypted_flag": "05c6ca0564a88891943ae43872bab828fcdf279e078be848036dd554e0b25649"}
+
+crypto{d0wn6r4d35_4r3_d4n63r0u5}
+
+Reflection: don't implement discrete log brute force in python yourself, even for 64bits :skull:
+    sage has discrete log
+
+    discrete_log(Mod(A, p), Mod(g, p))
+
+    R = GF(p)
+    A = R(A)
+    g = R(g)
+    discrete_log(g, A)
+

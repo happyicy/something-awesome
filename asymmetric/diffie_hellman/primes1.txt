@@ -1,0 +1,13 @@
+Inferius Prime
+When primes are small, it is easy to find p and q, so we lose
+Factordb is amazing
+
+Monoprime
+When n is prime, phi = n-1, finding the decryption key is easy
+
+Square eyes
+If n = p^2, finding the square root is very easy
+    - Idea: do a ctf problem using twin primes -> find sqrt of n, then the numbers beside it must be the primes we want
+
+Manyprime
+Factorise using alpertron

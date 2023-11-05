@@ -1,0 +1,7 @@
+import base64
+
+input = b'r\xbc\xa9\xb6\x8f\xc1j\xc7\xbe\xeb\x8f\x84\x9d\xca\x1d\x8ax>\x8a\xcf\x96y\xbf\x92i\xf7\xbf'
+
+output = base64.b64encode(input)
+print(output)
+# print(base64.b64encode(b"HACKMAC{"))

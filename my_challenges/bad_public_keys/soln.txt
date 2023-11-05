@@ -1,0 +1,5 @@
+Given two powers pt**e1 and pt**e2, it is actually possible to find pt**gcd(e1,e2)
+Note that pt**e1 * inverse(pt**e2) = pt**(e1-e2). Doing this repeatedly allows us to get
+pt**r, where r is the remainder of e1 mod e2. This allows us to perform something like the
+Euclidean algorithm on the exponents of pt, ultimately allowing us to get pt**1 without
+having decryption keys.

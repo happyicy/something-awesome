@@ -1,0 +1,6 @@
+Looking at the polynomial for q, we note that p**4 < q < (p+1)**4.
+This means that our n = pq is bounded by p**5 < n < (p+1)**5.
+Taking the floor of the 5th root of n gives us p, and from there decrypting is easy.
+
+The purpose of this challenge was to demonstrate the dangers of picking two primes
+that are related, inspired by Square Eyes.
