@@ -1,3 +1,6 @@
+# I have this polynomial I really like, so I've implemented RSA
+# using this polynomial. Seems fine to me, just a quirky second prime.
+
 from Crypto.Util.number import getPrime, inverse, GCD, bytes_to_long, long_to_bytes
 from sympy.ntheory import nextprime, isprime
 
