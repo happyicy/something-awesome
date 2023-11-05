@@ -1,0 +1,112 @@
+Intro
+    10.
+xor first few letters with "crypto{" to get "myXORke", guess the key
+
+Mods
+    Adrien's Signs
+p is 3 mod 4, and a is a quadratic residue so any power is still a qr, but -1 isn't
+
+    a = 288260533169915
+    p = 1007621497415251
+    output = data
+    ans = ""
+    for x in output:
+        if pow(x, (p-1)//2, p) == 1:
+            ans += "1"
+        else:
+            ans += "0"
+
+
+    Modular Binomials
+Make both into powers of e1e2, then take mod q. We then multiply them together and cancel the powers of p, and get 2 numbers congruent mod q.
+    Take gcd with N to get q, repeat with p or divide N.
+
+
+Symmetric
+
+    AES Galois field (Rijndael)
+Some mathy stuff: Galois field just means finite field
+    All Galois fields of equal order (always prime or prime power) are isomorphic (fair enough)
+Elemnts: 0-255
++ is xor (own inverse i guess)
+x is wtf?? how is this even a field
+    Involves bit shifts and xor (see implementation in symmetric)
+
+Turns out this is related to polynomials in some way
+GF(p^n) is the same as P_n (polynomials of degree <=n) over GF(p)
+Multiplication is just polynomial multiplication mod an irreducible polynomial
+    In this case it's x^8 + x^4 + x^3 + x + 1, in binary it's equivalent to xor with 0x1b
+    Exercise: How is xor related to polynomial division in binary?
+    
+
+Can I prove this has an inverse? Am I bothered?
+Probably a good idea to know how to find inverse
+    Exercise:
+
+Diffusion:
+    Increases complexity of the transformation
+
+CTF ideas:
+    Encryption without diffusion
+    Multiplication implemented using reducible polynomial?
+        I'm guessing multiplication is no longer invertible (need to confirm)
+        Probably if you take a root of the poly?
+        Task becomes finding a value that's not invertible mod the polynomial, and if they can't get the original back then it gives a byte of the flag instead
+
+Breaking AES:
+    passwords as keys: dictionary attack and trying all the hashes gets the key
+
+    ECB oracle: Each 16 byte block is encrypted separately.
+        Being able to input plaintext in front of the flag allows the characters in the flag to be computed one by one, which takes linear time instead of exponential
+        This was really cool, first time using python requests to automate the decryption process
+
+Asymmetric
+    RSA basics I already know
+
+    Some hashing documentation for future reference
+    h = SHA256.new(bytes)
+    h.digest() for hash as bytes
+
+    RSA Starter 6: Learning about digital signatures:
+        Message m -> create hash H(m) -> signature = H(m)^{my_private}, encryptedm = m^{your public}
+        m = encryptedm^{your_public}, check SHA256(m) = signature^{my_public}
+        
+    Parameter injection:
+        Give different primes to Alice and Bob, and do RSA with each person separately
+
+    
+Writeups shortlist:
+Maths
+    Adrien's Signs
+    Modular Binomials
+    *Broken RSA
+
+Symmetric
+    *passwords_as_keys - First time automating dictionary attack
+    *ECB oracle - First time making requests
+    flip cookie
+    *bean counter - First time decrypting a png
+
+RSA
+    *Square eyes: inspiration for another challenge
+
+Diffie Hellman
+    Parameter injection
+    Export grade - Learning how easy small primes are to discrete log
+    *Static client 2 -  insane problem
+
+
+
+
+Documentation for changing between data formats
+hexidecimal string -> bytes: bytes.fromhex(str)
+bytes -> hexidecimal string: b"a".hex()
+bytes -> hexbytes: hexlify(b'6') = b'36'
+
+long <-> bytes: Crypto.Util.number long_to_bytes(), bytes_to_long()
+
+bytes <-> string: decode(), encode("utf-8")
+
+hex string <-> int: int("0x05", 0), hex(5)
+
+base64 <-> bytes: base64 b64encode, b64decode
